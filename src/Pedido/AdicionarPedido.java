@@ -1,4 +1,7 @@
-public class AdicionarPedido extends Pedido{
+package Pedido;
+import Cliente.Cliente;
+
+public class AdicionarPedido extends Pedido {
     public AdicionarPedido(Cliente cliente) {
         super(cliente);
     }
@@ -10,5 +13,4 @@ public class AdicionarPedido extends Pedido{
             valorTotal += item.calcularTotal();
         }
     }
-
 }

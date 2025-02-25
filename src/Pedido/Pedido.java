@@ -1,3 +1,5 @@
+package Pedido;
+import Cliente.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 

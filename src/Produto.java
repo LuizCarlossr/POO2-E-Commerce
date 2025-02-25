@@ -1,16 +1,14 @@
 public class Produto {
-    private int id;          // Identificador único do produto
-    private String nome;     // Nome do produto
-    private double preco;    // Preço do produto
+    private int id;
+    private String nome;
+    private double preco;
 
-    // Construtor para inicializar um produto
-    public Produto(int id, String nome, double preco) {
+      public Produto(int id, String nome, double preco) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
     }
 
-    // Getters e Setters
 
     public int getId() {
         return id;

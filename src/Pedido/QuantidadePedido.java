@@ -1,4 +1,7 @@
-public class QuantidadePedido extends Pedido{
+package Pedido;
+import Cliente.Cliente;
+
+public class QuantidadePedido extends Pedido {
     public QuantidadePedido(Cliente cliente) {
         super(cliente);
     }

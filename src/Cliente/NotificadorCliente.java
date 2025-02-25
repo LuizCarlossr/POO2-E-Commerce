@@ -1,6 +1,5 @@
 package Cliente;
 
-
 public class NotificadorCliente {
     private Notificador notificador;
 

@@ -1,4 +1,7 @@
-public class RemoverPedido extends Pedido{
+package Pedido;
+import Cliente.Cliente;
+
+public class RemoverPedido extends Pedido {
     public RemoverPedido(Cliente cliente) {
         super(cliente);
     }
