@@ -8,7 +8,6 @@ public class Cliente {
     private String tipo;
     private String documento;
 
-    // Construtor da classe Cliente
     public Cliente(String nome, String endereco, String telefone, String email, String tipo, String documento) {
         this.nome = nome;
         this.endereco = endereco;
