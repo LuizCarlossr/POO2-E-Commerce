@@ -1,5 +1,5 @@
-package Pedido;
-import Cliente.Cliente;
+package Pedidos;
+import Clientes.Cliente;
 
 public class FinalizarPedido extends Pedido {
     public FinalizarPedido(Cliente cliente) {
@@ -12,7 +12,6 @@ public class FinalizarPedido extends Pedido {
             return;
         }
         status = StatusPedido.AGUARDANDO_PAGAMENTO;
-        cliente.getNotificacao().notificar("Pedido.Pedido finalizaro.");
         System.out.println("Aguardando Pagamento");
     }
 }

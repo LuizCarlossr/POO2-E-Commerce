@@ -1,10 +1,10 @@
-package Pedido;
-import Cliente.Cliente;
+package Pedidos;
+import Clientes.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
-    Cliente cliente;
+    private   Cliente cliente;
     protected List<ItemPedido> itens;
     protected StatusPedido status;
     protected StatusPagamento statusPagamento;

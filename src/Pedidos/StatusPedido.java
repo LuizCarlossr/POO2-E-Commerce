@@ -1,4 +1,4 @@
-package Pedido;
+package Pedidos;
 
 public enum StatusPedido {
     ABERTO,

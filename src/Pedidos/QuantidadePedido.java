@@ -1,5 +1,6 @@
-package Pedido;
-import Cliente.Cliente;
+package Pedidos;
+import Clientes.Cliente;
+import Produtos.Produto;
 
 public class QuantidadePedido extends Pedido {
     public QuantidadePedido(Cliente cliente) {

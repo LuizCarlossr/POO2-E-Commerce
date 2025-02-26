@@ -1,4 +1,4 @@
-package Cliente;
+package Clientes;
 
 import java.util.ArrayList;
 import java.util.List;

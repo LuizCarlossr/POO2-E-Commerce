@@ -1,5 +1,6 @@
-package Pedido;
-import Cliente.Cliente;
+package Pedidos;
+import Clientes.Cliente;
+import Produtos.Produto;
 
 public class AdicionarPedido extends Pedido {
     public AdicionarPedido(Cliente cliente) {

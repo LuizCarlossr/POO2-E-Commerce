@@ -1,4 +1,8 @@
-package Cliente;
+import Clientes.*;
+import Produtos.Produto;
+import Produtos.ProdutoRepositorio;
+import Produtos.ProdutoRepositorioImpl;
+import Produtos.ProdutoServico;
 
 import java.util.List;
 import java.util.Scanner;
@@ -9,12 +13,17 @@ public class Main {
 
         ClienteRepositorio clienteRepositorio = new ClienteRepositorioImpl();
         ClienteServico clienteServico = new ClienteServico(clienteRepositorio);
+        ProdutoRepositorio produtoRepositorio = new ProdutoRepositorioImpl();
+        ProdutoServico produtoServico = new ProdutoServico(produtoRepositorio);
 
         Notificador notificadorEmail = new NotificadorEmail();
         Notificador notificadorWhatsApp = new NotificadorWhatsApp();
         Notificador notificadorSMS = new NotificadorSMS();
 
         Scanner scanner = new Scanner(System.in);
+
+
+
         boolean continuar = true;
 
         while (continuar) {
@@ -23,7 +32,11 @@ public class Main {
             System.out.println("2. Listar clientes");
             System.out.println("3. Atualizar cliente");
             System.out.println("4. Remover cliente");
-            System.out.println("5. Sair");
+            System.out.println("5. Cadastrar produtos");
+            System.out.println("6. Listar produtos");
+            System.out.println("7. Atualizar produto");
+            System.out.println("8. Remover produto");;
+            System.out.println("9. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
@@ -99,6 +112,47 @@ public class Main {
                     break;
 
                 case 5:
+                    System.out.println("Digite o nome do produto: ");
+                    String nomeProduto = scanner.nextLine();
+                    System.out.println("Digite o valor do produto: ");
+                    double precoProduto = scanner.nextDouble();
+                    scanner.nextLine();
+                    Produto produto = new Produto(nomeProduto,precoProduto);
+                    produtoRepositorio.adicionar(produto);
+                    System.out.println("Produto cadastrado no sistema.");
+                    break;
+
+                case 6:
+                    List<Produto> produtos = produtoRepositorio.listarTodos();
+                    if (produtos.isEmpty()) {
+                        System.out.println("Nenhum produto cadastrado.");
+                    }  else {
+                        System.out.println("Produto cadastrado: ");
+                        for (Produto p  : produtos) {
+                            System.out.println(p);
+                        }
+                    }
+                    break;
+
+                case 7:
+                    System.out.println("ID do produto a ser atualizado: ");
+                    int produtoId = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Digite o nome do produto: ");
+                    String novoNomeProduto = scanner.nextLine();
+                    System.out.println("Atualize o preço do produto: ");
+                    double novoPreco = scanner.nextDouble();
+                    scanner.nextLine();
+                    produtoServico.atualizarProduto(produtoId,novoNomeProduto, novoPreco);
+
+                case 8:
+                    System.out.println("Id do produto que será removido: ");
+                    int idRemoverProduto = scanner.nextInt();
+                    scanner.nextLine();
+                    produtoServico.remover(idRemoverProduto);
+                    break;
+
+                case 9:
                     continuar = false;
                     System.out.println("Saindo...");
                     break;

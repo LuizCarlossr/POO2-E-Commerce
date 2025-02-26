@@ -1,4 +1,4 @@
-package Cliente;
+package Clientes;
 
 public class NotificadorWhatsApp implements Notificador {
 

@@ -1,4 +1,4 @@
-package Cliente;
+package Clientes;
 
 public class NotificadorCliente {
     private Notificador notificador;
