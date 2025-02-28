@@ -1,13 +1,14 @@
 package Produtos;
 
 public class Produto implements IProduto {
+    private static int contadorId = 0;
     private int id;
     private String nome;
     private double preco;
     private double precoVenda;
 
     public Produto(String nome, double preco) {
-        this.id = 0;
+        this.id = contadorId++;
         this.nome = nome;
         setPreco(preco);
         this.precoVenda = preco;
