@@ -1,4 +1,5 @@
 import Clientes.*;
+import Clientes.Notificador;
 import Produtos.*;
 import java.util.List;
 import java.util.Scanner;
@@ -29,7 +30,13 @@ public class Main {
             System.out.println("6. Listar produtos com desconto");
             System.out.println("7. Atualizar produto");
             System.out.println("8. Remover produto");
-            System.out.println("9. Sair");
+            System.out.println("9. Iniciar pedido (Ainda não funciona)");
+            System.out.println("10. Adicionar item no pedido (Ainda não funciona)");
+            System.out.println("11. Remover item do pedido (Ainda não funciona)");
+            System.out.println("12. Finalizar pedido (Ainda não funciona)");
+            System.out.println("13. Efetuar pagamento (Ainda não funciona)");
+            System.out.println("14. Efetuar a Entrega do pedido (Ainda não funciona)");
+            System.out.println("15. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
@@ -200,6 +207,24 @@ public class Main {
                     break;
 
                 case 9:
+                    System.out.println("Digite o Nome do cliente para iniciar o pedido: ");
+
+                case 10:
+                    System.out.println("Digite o ID do pedido para adicionar: ");
+
+                case 11:
+                    System.out.println("Digite o Id do peidod para remover: ");
+
+                case 12:
+                    System.out.println("Digite o ID do pedido para finalizar: ");
+
+                case 13:
+                    System.out.println("Digite o ID do pedido para pagar: ");
+
+                case 14:
+                    System.out.println("Digite o ID do pedido para entregar: ");
+
+                case 15:
                     continuar = false;
                     System.out.println("Saindo...");
                     break;

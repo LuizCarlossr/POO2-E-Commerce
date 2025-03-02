@@ -5,12 +5,12 @@ import Produtos.Produto;
 public class ItemPedido {
     private Produto produto;
     private int quantidade;
-    private double precoVenda;
+    private double precoUnidade;
 
-    public ItemPedido(Produto produto, int quantidade, double precoVenda) {
+    public ItemPedido(Produto produto, int quantidade, double precoUnidade) {
         this.produto = produto;
         this.quantidade = quantidade;
-        this.precoVenda = precoVenda;
+        this.precoUnidade = precoUnidade;
     }
 
     public Produto getProduto() {
@@ -25,11 +25,11 @@ public class ItemPedido {
         this.quantidade = quantidade;
     }
 
-    public double getPrecoVenda() {
-        return precoVenda;
+    public double getPrecoUnidade() {
+        return precoUnidade;
     }
 
     public double calcularTotal() {
-        return  precoVenda * quantidade;
+        return  precoUnidade * quantidade;
     }
 }

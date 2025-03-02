@@ -17,7 +17,7 @@ public class Cliente {
         this.documento = documento;
     }
 
-     public String getNome() {
+    public String getNome() {
         return nome;
     }
 
