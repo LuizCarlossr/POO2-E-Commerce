@@ -32,22 +32,23 @@ public class Main {
 
         while (continuar) {
             System.out.println("--- Menu ---");
-            System.out.println("1. Cadastrar cliente");
-            System.out.println("2. Listar clientes");
-            System.out.println("3. Atualizar cliente");
-            System.out.println("4. Remover cliente");
-            System.out.println("5. Cadastrar produtos com desconto");
-            System.out.println("6. Listar produtos com desconto");
-            System.out.println("7. Atualizar produto");
-            System.out.println("8. Remover produto");
-            System.out.println("9. Criar Pedido");
+            System.out.println(" 1. Cadastrar cliente");
+            System.out.println(" 2. Listar clientes");
+            System.out.println(" 3. Atualizar cliente");
+            System.out.println(" 4. Remover cliente");
+            System.out.println(" 5. Cadastrar produtos com desconto");
+            System.out.println(" 6. Listar produtos com desconto");
+            System.out.println(" 7. Atualizar produto");
+            System.out.println(" 8. Remover produto");
+            System.out.println(" 9. Criar Pedido");
             System.out.println("10. Adicionar Produto ao Pedido");
             System.out.println("11. Remover Produto do Pedido");
             System.out.println("12. Alterar Quantidade no Pedido");
-            System.out.println("13. Finalizar Pedido");
-            System.out.println("14. Realizar Pagamento");
-            System.out.println("15. Entregar Pedido");
-            System.out.println("16. Sair");
+            System.out.println("13. Lista de Pedidos cadastrados");
+            System.out.println("14. Finalizar Pedido");
+            System.out.println("15. Realizar Pagamento");
+            System.out.println("16. Entregar Pedido");
+            System.out.println("17. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
@@ -125,6 +126,7 @@ public class Main {
                     scanner.nextLine();
                     ProdutoComDesconto produtoComDesconto = new ProdutoComDesconto(nomeProdutoComDesconto, precoProdutoComDesconto, percentualDesconto);
                     produtoRepositorio.adicionar(produtoComDesconto);
+                    produtos.add(produtoComDesconto);
                     System.out.println("Produto com desconto cadastrado no sistema.");
                     break;
 
@@ -263,7 +265,7 @@ public class Main {
                             System.out.println("Digite o valor da venda: ");
                             double valor = scanner.nextDouble();
                             PedidoService.adicionarItem(pedidoAdicionar, produtoAdicionar, quantidadeAdicionar, valor);
-                            System.out.println("Produto foi adicionado ao pedido!");
+                            System.out.println(" Produto foi adicionado ao pedido.");
                         } else {
                             System.out.println("Produto não encontrado.");
                         } break;
@@ -293,7 +295,7 @@ public class Main {
                             pedidoService.removerItem(pedidoRemover, itemRemover);
                             System.out.println("Produto removido do pedido.");
                         } else {
-                            System.out.println("Produto não econtrado no pedido.");
+                            System.out.println("Produto não encontrado no pedido.");
                         }
                     } else {
                         System.out.println("Pedido não encontrado");
@@ -324,7 +326,7 @@ public class Main {
                             System.out.println("Digite a nova quantidade: ");
                             int novaQuantidade = scanner.nextInt();
                             pedidoService.alterarQuantidadeItem(pedidoAlterar, itemAlterar, novaQuantidade);
-                            System.out.println("QUantidade alterada.");
+                            System.out.println("Quantidade alterada.");
                         } else {
                             System.out.println("Produto não foi encontrado.");
                         }
@@ -333,8 +335,17 @@ public class Main {
                     }
                     break;
 
-
                 case 13:
+                    System.out.println("Lista de Pedidos cadastrados: ");
+                    if (pedidos.isEmpty()) {
+                        System.out.println("Não possui pedido cadastrado.");
+                    } else {
+                        for (Pedido pedido : pedidos) {
+                            pedido.exibirDetalhes();
+                        }
+                    }
+
+                case 14:
                     System.out.println("Digite o ID do pedido para finalizar: ");
                     int idPedidoFinalizar = scanner.nextInt();
                     Pedido pedidoFinalizar = null;
@@ -351,7 +362,7 @@ public class Main {
                     }
                     break;
 
-                case 14:
+                case 15:
                     System.out.println("Digite o ID do Pedido para efetuar o pagamento: ");
                     int idPedidoPagar = scanner.nextInt();
                     Pedido pedidoPagar = null;
@@ -368,7 +379,7 @@ public class Main {
                     }
                     break;
 
-                case 15:
+                case 16:
                     System.out.println("Digite o ID do pedido para efetuar a entrega: ");
                     int idPedidoEntregar = scanner.nextInt();
                     scanner.nextLine();
@@ -387,7 +398,7 @@ public class Main {
                     break;
 
 
-                case 16:
+                case 17:
                     continuar = false;
                     System.out.println("Saindo...");
                     break;
