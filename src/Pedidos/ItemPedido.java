@@ -5,12 +5,12 @@ import Produtos.Produto;
 public class ItemPedido {
     private Produto produto;
     private int quantidade;
-    private double precoUnidade;
+    private double valor;
 
-    public ItemPedido(Produto produto, int quantidade, double precoUnidade) {
+    public ItemPedido(Produto produto, int quantidade, double valor) {
         this.produto = produto;
         this.quantidade = quantidade;
-        this.precoUnidade = precoUnidade;
+        this.valor = valor;
     }
 
     public Produto getProduto() {
@@ -21,15 +21,20 @@ public class ItemPedido {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public double getPrecoUnidade() {
-        return precoUnidade;
+    public double getValor() {
+        return valor;
     }
 
     public double calcularTotal() {
-        return  precoUnidade * quantidade;
+        return  valor * quantidade;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemPedido{" +
+                "produto=" + produto.getNome() +
+                ", quantidade=" + quantidade +
+                ", valor=" + valor +
+                "total=" + calcularTotal() + '}';
     }
 }

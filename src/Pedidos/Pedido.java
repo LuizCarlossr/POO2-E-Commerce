@@ -2,77 +2,65 @@ package Pedidos;
 
 import Clientes.Cliente;
 import Clientes.Notificador;
+import Produtos.Produto;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Pedido implements Notificador {
+public class Pedido {
+    private static int idPedido = 1;
     private int id;
     private Cliente cliente;
     private List<ItemPedido> itens;
-    private Date dataCriacao;
     private StatusPedido statusPedido;
-    private StatusPagamento statusPagamento;
-    private Notificador notificador;
+    private double total;
 
-    public Pedido(int id, Cliente cliente) {
-        this.id = id;
+    //private StatusPagamento statusPagamento;
+    //private Notificador notificador;
+
+    public Pedido(Cliente cliente) {
+        this.id = idPedido++;
         this.cliente = cliente;
         this.itens = new ArrayList<>();
-        this.dataCriacao = new Date();
         this.statusPedido = StatusPedido.ABERTO;
-        this.statusPagamento = StatusPagamento.PENDENTE;
-        this.notificador = new Notificador() {
-            @Override
-            public void notificar(Cliente cliente, String mensagem) {
+        this.total = 0.0;
+    };
 
-            }
-        };
+    public int getId() { return id; }
+    public Cliente getCliente() { return cliente; }
+    public StatusPedido getStatusPedido() { return statusPedido; }
+
+    public void setStatusPedido(StatusPedido statusPedido) {
+        this.statusPedido = statusPedido; }
+
+    public List<ItemPedido> getItens() { return itens; }
+
+    public double getTotal() { return total; }
+
+    public void adicionarItem(Produto produto, int quantidade, double valor) {
+        ItemPedido itemPedido = new ItemPedido(produto, quantidade, valor);
+        itens.add(itemPedido);
+        total += itemPedido.calcularTotal();
     }
 
-    public void adicionarPedido(ItemPedido item) {
-        this.itens.add(item);
+    public void removerItem(ItemPedido itemPedido) {
+        itens.remove(itemPedido);
+        total -= itemPedido.calcularTotal();
     }
 
-    public void removerPedido(ItemPedido item) {
-        this.itens.remove(item);
-    }
-
-    public void alterarQuanttidade(ItemPedido item, int novaQuantidade) {
-        item.setQuantidade(novaQuantidade);
-    }
-
-    public void finalizarPedido() {
-        if (itens.isEmpty() || calcularTotal() <= 0) {
-            throw new IllegalArgumentException("O carrinho de compra deve ter um pedido com algum valor. ");
+    public void alterarQuantidadeItem(ItemPedido itemPedido, int novaQuantidade) {
+        itemPedido = new ItemPedido(itemPedido.getProduto(), novaQuantidade, itemPedido.getValor());
+        total = 0;
+        for (ItemPedido ip : itens) {
+            total += ip.getValor();
         }
-        this.statusPedido = StatusPedido.AGUARDANDO_PAGAMENTO;
-    }
-
-    public void efetuarPagamento() {
-        if (statusPedido == StatusPedido.AGUARDANDO_PAGAMENTO) {
-            this.statusPagamento = StatusPagamento.PAGO;
-            this.statusPedido = StatusPedido.FINALIZADO;
-        }
-    }
-
-    public void entregarPedido() {
-        if (statusPagamento == StatusPagamento.PAGO) {
-            this.statusPedido = StatusPedido.FINALIZADO;
-        }
-    }
-
-    public double calcularTotal() {
-        double total = 0;
-        for (ItemPedido item : itens) {
-            total += item.calcularTotal();
-        }
-        return total;
     }
 
     @Override
-    public void notificar(Cliente cliente, String mensagem) {
-
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id + ", cliente=" + cliente.getNome() + "statusPedido=" + statusPedido +
+                ", total=" + total + ", itens=" + itens + '}';
     }
 }
