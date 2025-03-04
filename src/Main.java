@@ -14,11 +14,8 @@ public class Main {
         ClienteServico clienteServico = new ClienteServico(clienteRepositorio);
         ProdutoRepositorio produtoRepositorio = new ProdutoRepositorioImpl();
         ProdutoServico produtoServico = new ProdutoServico(produtoRepositorio);
+        
         PedidoService pedidoService = new PedidoService(new NotificadorPedido() {
-            @Override
-            public void notificadorPedido(String mensagem, String email) { }
-        });
-
         Notificador notificadorEmail = new NotificadorEmail();
         Notificador notificadorWhatsApp = new NotificadorWhatsApp();
         Notificador notificadorSMS = new NotificadorSMS();
