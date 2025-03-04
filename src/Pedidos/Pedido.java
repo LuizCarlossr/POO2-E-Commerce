@@ -1,11 +1,9 @@
 package Pedidos;
 
 import Clientes.Cliente;
-import Clientes.Notificador;
 import Produtos.Produto;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Pedido {
@@ -19,9 +17,6 @@ public class Pedido {
     private StatusPedido statusPedido;
     private double total;
 
-    //private StatusPagamento statusPagamento;
-    //private Notificador notificador;
-
     public Pedido(Cliente cliente) {
         this.id = idPedido++;
         this.cliente = cliente;
@@ -31,18 +26,31 @@ public class Pedido {
         this.entregue = false;
         this.statusPedido = StatusPedido.ABERTO;
         this.total = 0.0;
-    };
+    }
 
-    public int getId() { return id; }
-    public Cliente getCliente() { return cliente; }
-    public StatusPedido getStatusPedido() { return statusPedido; }
+    public int getId() {
+        return id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
+    }
 
     public void setStatusPedido(StatusPedido statusPedido) {
-        this.statusPedido = statusPedido; }
+        this.statusPedido = statusPedido;
+    }
 
-    public List<ItemPedido> getItens() { return itens; }
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
 
-    public double getTotal() { return total; }
+    public double getTotal() {
+        return total;
+    }
 
     public void adicionarItem(Produto produto, int quantidade, double valor) {
         ItemPedido itemPedido = new ItemPedido(produto, quantidade, valor);
@@ -56,12 +64,13 @@ public class Pedido {
     }
 
     public void alterarQuantidadeItem(ItemPedido itemPedido, int novaQuantidade) {
-        itemPedido = new ItemPedido(itemPedido.getProduto(), novaQuantidade, itemPedido.getValor());
+        itemPedido.setQuantidade(novaQuantidade);
         total = 0;
         for (ItemPedido ip : itens) {
-            total += ip.getValor();
+            total += ip.calcularTotal();
         }
     }
+
     public void exibirDetalhes() {
         System.out.println("***Detalhes do Pedido***");
         System.out.println("ID do Pedido: " + this.id);
@@ -70,7 +79,7 @@ public class Pedido {
         System.out.println("Entregue: " + (entregue ? "Sim" : "Não"));
 
         System.out.println("\nLista de Itens do Pedido");
-        if ( itens.isEmpty()) {
+        if (itens.isEmpty()) {
             System.out.println("Não possui nenhum item no pedido.");
         } else {
             for (ItemPedido itemPedido : itens) {
@@ -84,7 +93,8 @@ public class Pedido {
     @Override
     public String toString() {
         return "Pedido{" +
-                "id=" + id + ", cliente=" + cliente.getNome() + "statusPedido=" + statusPedido +
+                "id=" + id + ", cliente=" + cliente.getNome() +
+                ", statusPedido=" + statusPedido +
                 ", total=" + total + ", itens=" + itens + '}';
     }
 }

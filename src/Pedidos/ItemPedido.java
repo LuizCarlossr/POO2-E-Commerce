@@ -26,7 +26,11 @@ public class ItemPedido {
     }
 
     public double calcularTotal() {
-        return  valor * quantidade;
+        return valor * quantidade;
+    }
+
+     public void setQuantidade(int novaQuantidade) {
+        this.quantidade = novaQuantidade;
     }
 
     @Override
@@ -35,6 +39,6 @@ public class ItemPedido {
                 "produto=" + produto.getNome() +
                 ", quantidade=" + quantidade +
                 ", valor=" + valor +
-                "total=" + calcularTotal() + '}';
+                ", total=" + calcularTotal() + '}';
     }
 }

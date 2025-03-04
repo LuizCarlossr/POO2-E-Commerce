@@ -12,7 +12,7 @@ public class PedidoService {
     public void finalizarPedido(Pedido pedido) {
         if (pedido.getTotal() > 0 && !pedido.getItens().isEmpty()) {
             pedido.setStatusPedido(StatusPedido.AGUARDANDO_PAGAMENTO);
-            notificadorPedido.notificadorPedido("Pedido" + pedido.getId() + " aguardando pagamento", pedido.getCliente().getEmail());
+            notificadorPedido.notificadorPedido("Pedido " + pedido.getId() + " aguardando pagamento", pedido.getCliente().getEmail());
         } else {
             System.out.println("Pedido só poderá ser finalizado quando tiver produto com valor.");
         }
@@ -24,7 +24,7 @@ public class PedidoService {
             notificadorPedido.notificadorPedido("Pagamento do pedido ", pedido.getCliente().getEmail());
             System.out.println("Pagamento confirmado.");
         } else {
-            System.out.println("O pedido não esta aguardando nenhum pagamento.");
+            System.out.println("O pedido não está aguardando nenhum pagamento.");
         }
     }
 
@@ -33,13 +33,13 @@ public class PedidoService {
             pedido.setStatusPedido(StatusPedido.FINALIZADO);
             notificadorPedido.notificadorPedido("Pedido " + pedido.getId() + " foi entregue.", pedido.getCliente().getEmail());
         } else {
-            System.out.println("Infelizmento o pagamento não foi realizado.");
+            System.out.println("Infelizmente o pagamento não foi realizado.");
         }
     }
 
     public static void adicionarItem(Pedido pedido, Produto produto, int quantidade, double valor) {
         pedido.adicionarItem(produto, quantidade, valor);
-        System.out.println("Produto" + produto.getNome() + " adicionado ao pedido " + pedido.getId());
+        System.out.println("Produto " + produto.getNome() + " adicionado ao pedido " + pedido.getId());
     }
 
     public void removerItem(Pedido pedido, ItemPedido itemPedido) {
@@ -49,7 +49,8 @@ public class PedidoService {
 
     public void alterarQuantidadeItem(Pedido pedido, ItemPedido itemPedido, int novaQuantidade) {
         pedido.alterarQuantidadeItem(itemPedido, novaQuantidade);
-        System.out.println("Quantidade do produto " + itemPedido.getProduto().getNome() + "alterado para " +
+
+        System.out.println("Quantidade do produto " + itemPedido.getProduto().getNome() + " alterado para " +
                 novaQuantidade + " no pedido " + pedido.getId());
     }
 }
