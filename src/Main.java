@@ -14,11 +14,9 @@ public class Main {
         ClienteServico clienteServico = new ClienteServico(clienteRepositorio);
         ProdutoRepositorio produtoRepositorio = new ProdutoRepositorioImpl();
         ProdutoServico produtoServico = new ProdutoServico(produtoRepositorio);
-        PedidoService pedidoService = new PedidoService(new NotificadorPedido() {
-            @Override
-            public void notificadorPedido(String mensagem, String email) {
-            }
-        });
+
+        NotificadorPedido notificadorPedido = new NotificadorPedidoImpl();
+        PedidoService pedidoService = new PedidoService(notificadorPedido);
 
         Notificador notificadorEmail = new NotificadorEmail();
         Notificador notificadorWhatsApp = new NotificadorWhatsApp();
@@ -53,6 +51,7 @@ public class Main {
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
+
 
             switch (opcao) {
                 case 1:

@@ -1,5 +1,5 @@
 package Pedidos;
 
-public interface NotificadorPedido {
+public  interface NotificadorPedido {
     void notificadorPedido(String mensagem, String email);
 }
