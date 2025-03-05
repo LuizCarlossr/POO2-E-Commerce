@@ -14,9 +14,10 @@ public class Main {
         ClienteServico clienteServico = new ClienteServico(clienteRepositorio);
         ProdutoRepositorio produtoRepositorio = new ProdutoRepositorioImpl();
         ProdutoServico produtoServico = new ProdutoServico(produtoRepositorio);
-
-        NotificadorPedido notificadorPedido = new NotificadorPedidoImpl();
-        PedidoService pedidoService = new PedidoService(notificadorPedido);
+        PedidoService pedidoService = new PedidoService(new INotificadorPedido() {
+            @Override
+            public void notificadorPedido(String mensagem, String email) { }
+        });
 
         Notificador notificadorEmail = new NotificadorEmail();
         Notificador notificadorWhatsApp = new NotificadorWhatsApp();
@@ -51,7 +52,6 @@ public class Main {
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
-
 
             switch (opcao) {
                 case 1:
@@ -229,9 +229,9 @@ public class Main {
                             break;
                         }
                     }
-                    if (clientePedido != null) {
-                        Pedido pedido = new Pedido(clientePedido);
-                        pedidos.add(pedido);
+                    if(clientePedido != null) {
+                         Pedido pedido = new Pedido(clientePedido);
+                         pedidos.add(pedido);
                         System.out.println("Pedido criado. ID do Pedido: " + pedido.getId());
                     } else {
                         System.out.println("Cliente não encontrado");
@@ -268,16 +268,15 @@ public class Main {
                             System.out.println(" Produto foi adicionado ao pedido.");
                         } else {
                             System.out.println("Produto não encontrado.");
-                        }
-                        break;
+                        } break;
                     }
 
                 case 11:
                     System.out.println("Digite o ID do Pedido para remover: ");
-                    int idPedidoRemover = scanner.nextInt();
+                    int idPedidoRemover =  scanner.nextInt();
                     Pedido pedidoRemover = null;
                     for (Pedido pedido : pedidos) {
-                        if (pedido.getId() == idPedidoRemover) {
+                        if(pedido.getId() == idPedidoRemover) {
                             pedidoRemover = pedido;
                             break;
                         }
@@ -313,7 +312,7 @@ public class Main {
                             break;
                         }
                     }
-                    if (pedidoAlterar != null) {
+                    if(pedidoAlterar != null) {
                         System.out.println("Digite o ID do produto para alterar a quantidade: ");
                         int idProdutoAlterar = scanner.nextInt();
                         ItemPedido itemAlterar = null;
@@ -368,7 +367,7 @@ public class Main {
                     int idPedidoPagar = scanner.nextInt();
                     Pedido pedidoPagar = null;
                     for (Pedido pedido : pedidos) {
-                        if (pedido.getId() == idPedidoPagar) {
+                        if(pedido.getId() == idPedidoPagar) {
                             pedidoPagar = pedido;
                             break;
                         }
@@ -386,7 +385,7 @@ public class Main {
                     scanner.nextLine();
                     Pedido pedidoEntregar = null;
                     for (Pedido pedido : pedidos) {
-                        if (pedido.getId() == idPedidoEntregar) {
+                        if ( pedido.getId() == idPedidoEntregar) {
                             pedidoEntregar = pedido;
                             break;
                         }

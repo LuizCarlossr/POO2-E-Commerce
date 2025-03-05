@@ -3,10 +3,11 @@ package Pedidos;
 import Produtos.Produto;
 
 public class PedidoService {
-    private NotificadorPedido notificadorPedido;
 
-    public PedidoService(NotificadorPedido notificadorP) {
-        this.notificadorPedido = notificadorP;
+    private INotificadorPedido notificadorPedido;
+
+    public PedidoService(INotificadorPedido notificadorPedido) {
+        this.notificadorPedido = notificadorPedido;
     }
 
     public void finalizarPedido(Pedido pedido) {
@@ -21,7 +22,7 @@ public class PedidoService {
     public void pagarPedido(Pedido pedido) {
         if (pedido.getStatusPedido() == StatusPedido.AGUARDANDO_PAGAMENTO) {
             pedido.setStatusPedido(StatusPedido.PAGO);
-            notificadorPedido.notificadorPedido("Pagamento do pedido ", pedido.getCliente().getEmail());
+            notificadorPedido.notificadorPedido("Pagamento do pedido " + pedido.getId(), pedido.getCliente().getEmail());
             System.out.println("Pagamento confirmado.");
         } else {
             System.out.println("O pedido não está aguardando nenhum pagamento.");
@@ -49,8 +50,6 @@ public class PedidoService {
 
     public void alterarQuantidadeItem(Pedido pedido, ItemPedido itemPedido, int novaQuantidade) {
         pedido.alterarQuantidadeItem(itemPedido, novaQuantidade);
-
-        System.out.println("Quantidade do produto " + itemPedido.getProduto().getNome() + " alterado para " +
-                novaQuantidade + " no pedido " + pedido.getId());
+        System.out.println("Quantidade do produto " + itemPedido.getProduto().getNome() + " alterada para " + novaQuantidade + " no pedido " + pedido.getId());
     }
 }

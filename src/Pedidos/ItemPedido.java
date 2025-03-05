@@ -33,6 +33,9 @@ public class ItemPedido {
         this.quantidade = novaQuantidade;
     }
 
+    public void setQuantidade(int novaQuantidade) {
+        this.quantidade = novaQuantidade; }
+
     @Override
     public String toString() {
         return "ItemPedido{" +
