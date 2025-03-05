@@ -19,6 +19,15 @@ public class Main {
         Notificador notificadorEmail = new NotificadorEmail();
         Notificador notificadorWhatsApp = new NotificadorWhatsApp();
         Notificador notificadorSMS = new NotificadorSMS();
+        PedidoService pedidoService = new PedidoService(new NotificadorPedido() {
+            @Override
+            public void notificar(Cliente cliente, String mensagem) {
+                notificadorEmail.notificar(cliente, mensagem);
+                notificadorWhatsApp.notificar(cliente, mensagem);
+                notificadorSMS.notificar(cliente, mensagem);
+            }
+        });
+            
 
         List<Cliente> clientes = clienteServico.listarClientes();
         List<Pedido> pedidos = new ArrayList<>();
