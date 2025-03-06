@@ -1,11 +1,9 @@
 package Pedidos;
 
 import Clientes.Cliente;
-import Clientes.Notificador;
 import Produtos.Produto;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Pedido {
@@ -16,19 +14,16 @@ public class Pedido {
     private StatusPedido statusPedido;
     private double total;
 
-    private StatusPagamento statusPagamento;
+    //private StatusPagamento statusPagamento;
     private INotificadorPedido notificadorPedido;
 
-    public Pedido(Cliente cliente, INotificadorPedido notificadorPedido) {
+    public Pedido(Cliente clientePedido) {
         this.id = idPedido++;
-        this.cliente = cliente;
+        this.cliente = clientePedido;
         this.itens = new ArrayList<>();
         this.statusPedido = StatusPedido.ABERTO;
         this.total = 0.0;
         this.notificadorPedido = notificadorPedido;
-    };
-
-    public Pedido(Cliente clientePedido) {
     }
 
     public int getId() { return id; }
@@ -39,29 +34,36 @@ public class Pedido {
 
     public void setStatusPedido(StatusPedido statusPedido) {
         this.statusPedido = statusPedido;
-        notificadorPedido.notificadorPedido("O status do pedido " + id + " foi alterado para " + statusPedido, cliente.getEmail());
+        if (notificadorPedido != null) {
+        notificadorPedido.notificadorPedido("O status do pedido " + id +
+                " foi alterado para " + statusPedido, cliente.getEmail()); }
     }
 
     public void adicionarItem(Produto produto, int quantidade, double valor) {
         ItemPedido itemPedido = new ItemPedido(produto, quantidade, valor);
         itens.add(itemPedido);
         total += itemPedido.calcularTotal();
-        notificadorPedido.notificadorPedido("Item adicionado: " + produto.getNome(), cliente.getEmail());
+        if (notificadorPedido != null) {
+        notificadorPedido.notificadorPedido("Item adicionado: " +
+                produto.getNome(), cliente.getEmail()); }
     }
 
     public void removerItem(ItemPedido itemPedido) {
         itens.remove(itemPedido);
         total -= itemPedido.calcularTotal();
-        notificadorPedido.notificadorPedido("Item removido: " + itemPedido.getProduto().getNome(), cliente.getEmail());
+        if (notificadorPedido != null) {
+        notificadorPedido.notificadorPedido("Item removido: " +
+                itemPedido.getProduto().getNome(), cliente.getEmail()); }
     }
 
     public void alterarQuantidadeItem(ItemPedido itemPedido, int novaQuantidade) {
         itemPedido.setQuantidade(novaQuantidade);
         total = 0;
         for (ItemPedido ip : itens) {
-            total += ip.calcularTotal();
-        }
-        notificadorPedido.notificadorPedido("Quantidade alterada para " + novaQuantidade + " do item " + itemPedido.getProduto().getNome(), cliente.getEmail());
+            total += ip.calcularTotal(); }
+        if (notificadorPedido != null) {
+        notificadorPedido.notificadorPedido("Quantidade alterada para " + novaQuantidade +
+                " do item " + itemPedido.getProduto().getNome(), cliente.getEmail()); }
     }
 
     public void exibirDetalhes() {

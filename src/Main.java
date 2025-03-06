@@ -81,10 +81,8 @@ public class Main {
                     } else {
                         System.out.println("Clientes cadastrados:");
                         for (Cliente c : clientes) {
-                            c.mostrarDetalhes();
-                        }
-                    }
-                    break;
+                            c.mostrarDetalhes(); }
+                    } break;
 
                 case 3:
                     System.out.print("Nome do cliente para atualizar: ");
@@ -103,8 +101,7 @@ public class Main {
                     Cliente clienteAtualizado = new Cliente(novoNome, novoEndereco, novoTelefone, novoEmail, "PF", novoCpf);
                     notificadorEmail.notificar(clienteAtualizado, "Seu Email foi atualizado!");
                     notificadorWhatsApp.notificar(clienteAtualizado, "Seu WhatsApp foi atualizado!");
-                    notificadorSMS.notificar(clienteAtualizado, "Seu SMS foi atualizado!");
-                    break;
+                    notificadorSMS.notificar(clienteAtualizado, "Seu SMS foi atualizado!"); break;
 
                 case 4:
                     System.out.print("Nome do cliente a remover: ");
@@ -113,8 +110,7 @@ public class Main {
                     Cliente clienteRemovido = new Cliente(nomeRemover, "Removido", "0", "removido@exemplo.com", "PF", "00000000000");
                     notificadorEmail.notificar(clienteRemovido, "Seu cadastro foi removido.");
                     notificadorWhatsApp.notificar(clienteRemovido, "Seu cadastro foi removido.");
-                    notificadorSMS.notificar(clienteRemovido, "Seu cadastro foi removido.");
-                    break;
+                    notificadorSMS.notificar(clienteRemovido, "Seu cadastro foi removido."); break;
 
                 case 5:
                     System.out.print("Digite o nome do produto com desconto: ");
@@ -127,8 +123,7 @@ public class Main {
                     ProdutoComDesconto produtoComDesconto = new ProdutoComDesconto(nomeProdutoComDesconto, precoProdutoComDesconto, percentualDesconto);
                     produtoRepositorio.adicionar(produtoComDesconto);
                     produtos.add(produtoComDesconto);
-                    System.out.println("Produto com desconto cadastrado no sistema.");
-                    break;
+                    System.out.println("Produto com desconto cadastrado no sistema."); break;
 
                 case 6:
                     List<Produto> produtosComDesconto = produtoRepositorio.listarTodos();
@@ -138,11 +133,8 @@ public class Main {
                         System.out.println("Produtos com desconto cadastrados:");
                         for (Produto p : produtosComDesconto) {
                             if (p instanceof ProdutoComDesconto) {
-                                System.out.println(p);
-                            }
-                        }
-                    }
-                    break;
+                                System.out.println(p); } }
+                    } break;
 
                 case 7:
                     System.out.print("ID do produto a ser atualizado: ");
@@ -191,13 +183,9 @@ public class Main {
                                     break;
 
                                 default:
-                                    System.out.println("Opção inválida!");
-                            }
-                        } else {
-                            System.out.println("O produto não é um produto com desconto!");
-                        }
-                    }
-                    break;
+                                    System.out.println("Opção inválida!"); }
+                        } else { System.out.println("O produto não é um produto com desconto!"); }
+                    } break;
 
                 case 8:
                     System.out.print("ID do produto a ser removido: ");
@@ -213,11 +201,8 @@ public class Main {
                         if (confirmacao.equalsIgnoreCase("S")) {
                             produtoRepositorio.remover(produtoRemover.getId());
                             System.out.println("Produto removido com sucesso!");
-                        } else {
-                            System.out.println("Remoção cancelada!");
-                        }
-                    }
-                    break;
+                        } else { System.out.println("Remoção cancelada!"); }
+                    } break;
 
                 case 9:
                     System.out.println("Digite o Nome do cliente para iniciar o pedido: ");
@@ -226,17 +211,13 @@ public class Main {
                     for (Cliente c : clientes) {
                         if (c.getNome().equalsIgnoreCase(nomePedido)) {
                             clientePedido = c;
-                            break;
-                        }
-                    }
-                    if(clientePedido != null) {
+                            break; }
+                    } if(clientePedido != null) {
                          Pedido pedido = new Pedido(clientePedido);
                          pedidos.add(pedido);
                         System.out.println("Pedido criado. ID do Pedido: " + pedido.getId());
-                    } else {
-                        System.out.println("Cliente não encontrado");
-                    }
-                    break;
+                    } else { System.out.println("Cliente não encontrado");
+                    } break;
 
 
                 case 10:
@@ -246,30 +227,24 @@ public class Main {
                     for (Pedido pedido : pedidos) {
                         if (pedido.getId() == idPedidoAdicionar) {
                             pedidoAdicionar = pedido;
-                            break;
-                        }
-                    }
-                    if (pedidoAdicionar != null) {
+                            break; }
+                    } if (pedidoAdicionar != null) {
                         System.out.println("Digite o ID do Produto para adicionar ao Pedido");
                         int idProdutoAdicionar = scanner.nextInt();
                         Produto produtoAdicionar = null;
                         for (Produto produto : produtos) {
                             if (produto.getId() == idProdutoAdicionar) {
                                 produtoAdicionar = produto;
-                                break;
-                            }
-                        }
-                        if (pedidoAdicionar != null) {
+                                break; }
+                        } if (pedidoAdicionar != null) {
                             System.out.println("Digite a quantidade: ");
                             int quantidadeAdicionar = scanner.nextInt();
                             System.out.println("Digite o valor da venda: ");
                             double valor = scanner.nextDouble();
                             PedidoService.adicionarItem(pedidoAdicionar, produtoAdicionar, quantidadeAdicionar, valor);
                             System.out.println(" Produto foi adicionado ao pedido.");
-                        } else {
-                            System.out.println("Produto não encontrado.");
-                        } break;
-                    }
+                        } else { System.out.println("Produto não encontrado.");
+                        } break; }
 
                 case 11:
                     System.out.println("Digite o ID do Pedido para remover: ");
@@ -278,29 +253,20 @@ public class Main {
                     for (Pedido pedido : pedidos) {
                         if(pedido.getId() == idPedidoRemover) {
                             pedidoRemover = pedido;
-                            break;
-                        }
-                    }
-                    if (pedidoRemover != null) {
+                            break; }
+                    } if (pedidoRemover != null) {
                         System.out.println("Digite o ID do produto para remover: ");
                         int idProdutoRemover = scanner.nextInt();
                         ItemPedido itemRemover = null;
                         for (ItemPedido itemPedido : pedidoRemover.getItens()) {
                             if (itemPedido.getProduto().getId() == idProdutoRemover) {
                                 itemRemover = itemPedido;
-                                break;
-                            }
-                        }
-                        if (itemRemover != null) {
+                                break; }
+                        } if (itemRemover != null) {
                             pedidoService.removerItem(pedidoRemover, itemRemover);
                             System.out.println("Produto removido do pedido.");
-                        } else {
-                            System.out.println("Produto não encontrado no pedido.");
-                        }
-                    } else {
-                        System.out.println("Pedido não encontrado");
-                    }
-                    break;
+                        } else { System.out.println("Produto não encontrado no pedido."); }
+                    } else { System.out.println("Pedido não encontrado"); } break;
 
                 case 12:
                     System.out.println("Digite a ID do Pedido para alterar: ");
@@ -309,31 +275,22 @@ public class Main {
                     for (Pedido pedido : pedidos) {
                         if (pedido.getId() == idPedidoAlterar) {
                             pedidoAlterar = pedido;
-                            break;
-                        }
-                    }
-                    if(pedidoAlterar != null) {
+                            break; }
+                    } if(pedidoAlterar != null) {
                         System.out.println("Digite o ID do produto para alterar a quantidade: ");
                         int idProdutoAlterar = scanner.nextInt();
                         ItemPedido itemAlterar = null;
                         for (ItemPedido itemPedido : pedidoAlterar.getItens()) {
                             if (itemPedido.getProduto().getId() == idProdutoAlterar) {
                                 itemAlterar = itemPedido;
-                                break;
-                            }
-                        }
-                        if (itemAlterar != null) {
+                                break; }
+                        } if (itemAlterar != null) {
                             System.out.println("Digite a nova quantidade: ");
                             int novaQuantidade = scanner.nextInt();
                             pedidoService.alterarQuantidadeItem(pedidoAlterar, itemAlterar, novaQuantidade);
                             System.out.println("Quantidade alterada.");
-                        } else {
-                            System.out.println("Produto não foi encontrado.");
-                        }
-                    } else {
-                        System.out.println("Pedido não foi encontrado.");
-                    }
-                    break;
+                        } else { System.out.println("Produto não foi encontrado."); }
+                    } else { System.out.println("Pedido não foi encontrado."); } break;
 
                 case 13:
                     System.out.println("Lista de Pedidos cadastrados: ");
@@ -341,9 +298,7 @@ public class Main {
                         System.out.println("Não possui pedido cadastrado.");
                     } else {
                         for (Pedido pedido : pedidos) {
-                            pedido.exibirDetalhes();
-                        }
-                    }
+                            pedido.exibirDetalhes(); } }
 
                 case 14:
                     System.out.println("Digite o ID do pedido para finalizar: ");
@@ -352,15 +307,11 @@ public class Main {
                     for (Pedido pedido : pedidos) {
                         if (pedido.getId() == idPedidoFinalizar) {
                             pedidoFinalizar = pedido;
-                            break;
-                        }
-                    }
-                    if (pedidoFinalizar != null) {
+                            break; }
+                    } if (pedidoFinalizar != null) {
                         pedidoService.finalizarPedido(pedidoFinalizar);
-                    } else {
-                        System.out.println("Pedido não foi encontrado.");
-                    }
-                    break;
+                    } else { System.out.println("Pedido não foi encontrado.");
+                    } break;
 
                 case 15:
                     System.out.println("Digite o ID do Pedido para efetuar o pagamento: ");
@@ -369,15 +320,11 @@ public class Main {
                     for (Pedido pedido : pedidos) {
                         if(pedido.getId() == idPedidoPagar) {
                             pedidoPagar = pedido;
-                            break;
-                        }
-                    }
-                    if (pedidoPagar != null) {
+                            break; }
+                    } if (pedidoPagar != null) {
                         pedidoService.pagarPedido(pedidoPagar);
-                    } else {
-                        System.out.println("Pedido não foi encontrado.");
-                    }
-                    break;
+                    } else { System.out.println("Pedido não foi encontrado.");
+                    } break;
 
                 case 16:
                     System.out.println("Digite o ID do pedido para efetuar a entrega: ");
@@ -387,27 +334,18 @@ public class Main {
                     for (Pedido pedido : pedidos) {
                         if ( pedido.getId() == idPedidoEntregar) {
                             pedidoEntregar = pedido;
-                            break;
-                        }
-                    }
-                    if (pedidoEntregar != null) {
+                            break; }
+                    } if (pedidoEntregar != null) {
                         pedidoService.entregarPedido(pedidoEntregar);
-                    } else {
-                        System.out.println("Pedido não foi encontrado.");
-                    }
-                    break;
-
+                    } else { System.out.println("Pedido não foi encontrado.");
+                    } break;
 
                 case 17:
                     continuar = false;
-                    System.out.println("Saindo...");
-                    break;
+                    System.out.println("Saindo..."); break;
 
-                default:
-                    System.out.println("Opção inválida!");
+                default: System.out.println("Opção inválida!");
             }
-        }
-
-        scanner.close();
+        } scanner.close();
     }
 }
