@@ -21,6 +21,9 @@ public class ItemPedido {
         return quantidade;
     }
 
+    public void setQuantidade(int novaQuantidade) {
+        this.quantidade = novaQuantidade; }
+
     public double getValor() {
         return valor;
     }
@@ -28,13 +31,6 @@ public class ItemPedido {
     public double calcularTotal() {
         return valor * quantidade;
     }
-
-     public void setQuantidade(int novaQuantidade) {
-        this.quantidade = novaQuantidade;
-    }
-
-    public void setQuantidade(int novaQuantidade) {
-        this.quantidade = novaQuantidade; }
 
     @Override
     public String toString() {
